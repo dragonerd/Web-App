@@ -1,4 +1,4 @@
-from flask import g, request
+from flask import g, request, Flask
 import configparser
 from flask_mail import Mail
 from flask_wtf import CSRFProtect
@@ -17,7 +17,6 @@ db = SQLAlchemy()
 jwt = JWTManager(app)
 csrf = CSRFProtect(app)
 
-
 Talisman(app, content_security_policy={'default-src': "'self'", 
                                        'script-src': "'self' https://ajax.googleapis.com'", 
                                        'img-src': "'self' data:",
@@ -32,7 +31,7 @@ def get_server_header():
         server = request.headers.get('Server')
         framework = request.headers.get('X-Powered-By')
         agent  = request.headers.get('User-Agent')
-        app.logger.info(f'\033[31m HEADERS = {server} {framework} {agent} \033[0m')
+        print(f'\033[31m HEADERS = {server} {framework} {agent} \033[0m')
         return server
 
 
@@ -43,6 +42,14 @@ def load_config():
     return config
 config = load_config()
 
+#Base de datos DUMMY
+dummy_database = config.getboolean('Develop', 'DummyDB')
+app.config['DUMMY_DATABASE'] = dummy_database
+
+valor_booleano = config.getboolean('Develop', 'DummyDB')
+print(f'\033[1;32m[DUMMY DATABASE] = {dummy_database}\033[0m')
+
+
 #Instancias server
 sqlalchemy_url = config['Database']['sqlalchemy.url']
 app.config['SQLALCHEMY_DATABASE_URI'] = sqlalchemy_url
@@ -52,7 +59,7 @@ def test_db():
     try:
         engine = create_engine(sqlalchemy_url)
         engine.connect()
-        app.logger.info(f'\033[1;32m[DB TEST] = SUCCESS\033[0m')
+        print(f'\033[1;32m[DB TEST] = SUCCESS\033[0m')
         return "En línea"
     except Exception as e:
         app.logger.info(f'\033[31m[DB TEST] = ERROR {e}\033[0m')
@@ -78,13 +85,13 @@ app.config['SECRET_KEY'] = SECRET_KEY
 #Variables Flask 
 server_port = int(config['Server']['port'])
 server_host = config['Server']['host']
-print(f'\033[1;32mServer Flask Info: PORT:{server_port} - HOST {server_host}\033[0m')
+print(f'\033[1;32m[FLASK][SERVER][INFO]: PORT:{server_port} - HOST {server_host}\033[0m')
 
 #Debug Mode
 debug_state = config.getboolean('App', 'DebugMode')
 app.config['DEBUG'] = debug_state
 valor_booleano = config.getboolean('App', 'DebugMode')
-app.logger.info(f'\033[1;32m[CSRF][DEBUG MODE] = {debug_state}\033[0m')
+print(f'\033[1;32m[CSRF][DEBUG MODE] = {debug_state}\033[0m')
 
 #OTROS
 app.config['SESSION_COOKIE_SECURE'] = True
@@ -97,7 +104,7 @@ app.config['WTF_CSRF_SECRET_KEY'] = WTF_SECRET_KEY
 enable_csrf = config['CSRF']['ENABLE_CSRF']
 app.config['WTF_CSRF_ENABLED'] = True
 valor_booleano = config.getboolean('CSRF', 'ENABLE_CSRF')
-app.logger.info(f'\033[1;32m[CSRF][WTF_CSRF_ENABLE] = {enable_csrf}\033[0m')
+print(f'\033[1;32m[CSRF][WTF_CSRF_ENABLE] = {enable_csrf}\033[0m')
 
 #Mail Confirmation
 app.config['MAIL_SERVER'] = config.get('MAIL', 'SERVER')
@@ -112,7 +119,7 @@ mail = Mail(app)
 #Mail Confirmation
 mail_confirmation = config.getboolean('REGISTER', 'SEND_EMAIL_REGISTER')
 app.config['SEND_EMAIL_REGISTER'] = mail_confirmation
-app.logger.info(f'\033[1;32m[REGISTER][SEND_EMAIL_REGISTER] = {mail_confirmation}\033[0m')
+print(f'\033[1;32m[REGISTER][SEND_EMAIL_REGISTER] = {mail_confirmation}\033[0m')
 
 #Estatus de verificacion de email para el panel PVADMIN         
 def email_ver_status():

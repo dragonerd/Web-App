@@ -22,15 +22,22 @@ from routes.feeds import feed
 from routes.csrf import csrf_check_status, csrf_api
 from routes.test import test
 import webbrowser
+from routes.database import request_feed
 
 
 
 @app.route('/')
 @app.route('/index')
 def index():
-    """
-    News Filtra de la base de datos la informacion de las noticias almacenadas.
-    """
+    if app.config['DUMMY_DATABASE']:
+        news = request_feed
+        render = render_template('index.html', text_data=text_data, news=news)
+        resp = make_response(render)
+        return resp  
+    else:
+        """
+        News Filtra de la base de datos la informacion de las noticias almacenadas.
+        """
     news = db.session.query(FeedInfo).order_by(FeedInfo.date.desc()).limit(2).all() #Muestra los 2 primeros elementos mas actuales
     render = render_template('index.html', text_data=text_data, news=news)
     resp = make_response(render)
@@ -108,8 +115,8 @@ def enviar_correo():
 
 
 if __name__ == "__main__":
-   webbrowser.open_new('http://127.0.0.1:5000/')
-   webbrowser.open_new('http://127.0.0.1:5000/pvadmin/login')
+   webbrowser.open_new('http://127.0.0.1:5000/') # Client
+   webbrowser.open_new('http://127.0.0.1:5000/pvadmin/login') # Pvadmin
    app.run(port=server_port, host=server_host)
 
 
