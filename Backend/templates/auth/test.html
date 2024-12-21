@@ -1,0 +1,23 @@
+{%extends 'base.html'%}
+{% block title%} Registro TEST{% endblock %}
+{% block content%}
+<h2 class="title">Registro de Jugador</h2>
+    <div class="contenedor">
+    <form class="form" action="{{ url_for('test_register.testregister') }}" method="post" required>
+        <label for="fname"> Nombre:</label>
+        <input type="text" id="fname" name="fname" required>
+        <label for="lname"> Apellido:</label>
+        <input type="text" id="lname" name="lname" required>
+        <label for="email"> Email:</label>
+        <input type="email" id="email" name="email" required>
+        <label for="username"> ID:</label>
+        <input type="text" id="username" name="username" required>
+        <label for="password"> contraseña:</label>
+        <input type="password" id="password" name="password" required>
+    </div>
+    <div class="MarginButton">
+        <br>
+        <input class="Button" type="submit" value="Registrarme">
+    </div>
+        </form>
+{% endblock %}

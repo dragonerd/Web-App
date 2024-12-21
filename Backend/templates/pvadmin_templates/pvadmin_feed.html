@@ -1,0 +1,28 @@
+{%extends 'pvadmin_base.html'%}
+{% block title%} PvAdmin Dashboard Feed 1.0 {% endblock %}
+{% block content%}
+<h1 class="title">Noticias</h1>
+<div class="contenedor">
+    <form class="form" method="POST" action="{{ url_for('admin_feed.pvadminfeed') }}">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+        <label for="date">fecha</label>
+        <input type="date" id="date" name="date" required>
+        <label for="author">Autor</label>
+        <input type="text" id="author" name="author" required>
+        <label for="feed">feed</label>
+        <input type="text" id="feed" name="feed" required>
+        <label for="title">Titulo</label>
+        <input type="text" id="title" name="title" required>
+</div>
+
+<div class="MarginButton">
+    <input class="Button" type="submit" value="Agregar Noticia">
+    </div>
+</form>
+    <div class="MarginButton">
+        <a class="Button" type="Button" value="Ver Noticias" href="{{ url_for('admin_feed.show_all_feeds')}}">Ver Noticias en lista</a>
+        </div>
+        <div class="MarginButton">
+            <a class="Button" type="Button" value="Regresar" href="{{ url_for('admin_dashboard.pvadmindashboard')}}">Regresar</a>
+            </div>
+{% endblock %}

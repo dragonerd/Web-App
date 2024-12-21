@@ -1,0 +1,21 @@
+{%extends 'pvadmin_base.html'%}
+{% block title%} PvAdmin Update Status {% endblock %}
+{% block content%}
+<div class="InicioButton">
+    <a class="Button" href="{{ url_for('admin_users.show_all_users')}}">Regresar a la lista</a>
+</div>
+<h1 class="title">Actualizar Estado de cuenta</h1>
+<div class="contenedor">
+    <form class="form" method="POST" action="{{url_for('admin_update_status.updatestatus', user_id=user_id)}}" >
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+        <label for="">Estatus:</label>
+        <select id="options-list" name="status" required>
+                <option value="0">Inactivo</option>
+                <option value="1">Activo</option>
+            </select>
+</div>
+<div class="MarginButton">
+    <input class="Button" type="submit" value="Actualizar">
+</div>
+</form>
+{% endblock %}

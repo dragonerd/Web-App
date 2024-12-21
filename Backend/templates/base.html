@@ -1,0 +1,26 @@
+<!--PAGINA BASE QUE TENDRA EN TODA LA ESTRUCTURA WEB-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename ='css/style.css')}}">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+</head>
+    <title>Proyecto ELO - {% block title %}{% endblock %}</title>
+</head>
+<body>
+    <div class="InicioButton">
+        <a class="Button" href="{{ url_for('index')}}">INICIO</a>
+    </div>
+{% block content%}
+{% endblock %}
+<footer class="footerPosition">
+    <div class="footer">
+        <p>{{ text_data['key1'] }}</p>
+        <p>{{ text_data['version'] }}</p>
+    <a href="{{ text_data['key3']}}">Contact us.</a></p>
+    <div>
+    </footer>
+</body>
+</html>

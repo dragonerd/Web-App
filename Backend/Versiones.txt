@@ -1,0 +1,221 @@
+Leyenda:
+
+Fix = [PE-BX]
+Feature = [PE-FX]
+hotfix = [PE-HFX]
+
+
+////////////////////////////////////////////////////////////////////////////////
+
+Version 0.1 (06/04/2024) 
+
+////////////////////////////////////////////////////////////////////////////////
+
+-Se inicia el proyecto ELO 
+-Se crea el repositorio 
+-Se agrega Opciones de Login (Frontend)
+
+
+////////////////////////////////////////////////////////////////////////////////
+
+Version 0.2 (07/04/2024) 
+
+////////////////////////////////////////////////////////////////////////////////
+
+-Se crea instancias de conexion para la base de datos
+-Se utiliza un RDS en AWS para conectar una base de datos a la nube
+-Se conecta satisfactoriamente.
+
+
+////////////////////////////////////////////////////////////////////////////////
+
+Version 0.3 (15/04/2024)
+
+////////////////////////////////////////////////////////////////////////////////
+
+-Crud en Registro de usuario
+-Agregado de funcion para conectar a base de datos POSTGRESQL
+-Ahora se pueden Registrar en la base de datos (Backend)
+-Optimizacion de login
+-Areglos varios (Frontend)
+
+Bugs:
+-[PE-B1]Al crear usuario, no funciona la opcion conn.close()
+-[PE-B2]Al registrar el usuario, permanece en la seccion register
+
+
+////////////////////////////////////////////////////////////////////////////////
+
+Version 0.3.1 (17/04/2024)
+
+////////////////////////////////////////////////////////////////////////////////
+
+Features:
+-[PE-F1]Modulos 'Dashboard','Login' y 'Profile' creados
+
+-Ahora Se puede ingresar con tus datos en el nuevo modulo 'Login'
+-Separacion de algunos modulos para trabajar de manera independiente para su rapido arreglo
+si llegase a ocurrir un error
+
+Fix:
+-[PE-B2] Ahora retorna correctamente
+
+Bugs:
+-[PE-B1]Al crear usuario, no funciona la opcion conn.close()
+-[PE-B3]Al logear con datos de usuario, no retorna al modulo correspondiente
+
+
+////////////////////////////////////////////////////////////////////////////////
+
+Version 0.3.5 (18/04/2024)
+
+////////////////////////////////////////////////////////////////////////////////
+
+Features:
+-[PE-F2]Modulos actualizados, nuevas funcionalidades de dashboard (Datos), mantener sesion, logout
+
+-Se cambio el metodo de Login
+-Se agrego seccion "Mi Perfil"
+-Se Mantiene La sesion del usuario en index
+
+Fix:
+-[PE-B3] Ahora retorna a dashboard y podras deslogear correctamente
+
+Bugs:
+-[PE-B1]Al crear usuario, no funciona la opcion conn.close()
+
+
+
+////////////////////////////////////////////////////////////////////////////////
+
+Version 0.4.0 (27/04/2024)
+
+////////////////////////////////////////////////////////////////////////////////
+
+Features:
+-CRUD de todos los modulos
+-Cambio de framework para base de datos (psycopg2 x SQLAalchemy)
+-[PE-F3] Agregamos Configuracion de Base de datos mediante archivo ini usando configparser, ahora todo se configura
+de manera mas rapida y externa
+-[PE-F4] Agregamos Modulo "Recuperar Password" Version 0.1, tiene algunas brechas de seguridad por definir
+por ejemplo un password temporal para que el usuario pueda cambiarla desde el Dashboard.
+-Mejoras UI/UX
+[PE-F5]Hemos Defindo un registro de datos en la terminal para buscar registros especificos ante cualquier
+irregularidad de datos ingresados
+[PE-F6]Register Version 0.4, se mejoro la captura de datos.
+[PE-F7]Login Version 0.4, Mejoramos la redireccion y parte de los elementos front al igual que la captura de datos
+[PE-F8]Dashboard Version 0.4, Mejoramos la redireccion y parte de los elementos front y captura de datos
+[PE-F9]Recovery Info Version 0.1 (Nuevo), Con algunas brechas de seguridad por arreglar y definir para mas seguridad
+version estable y sin errores
+[PE-F10]Footer Agregado
+
+Fix:
+-[PE-B1]Cambiamos el metodo de conexion para una mejor gestion de recursos y datos
+
+Fix Menores:
+-Favicon Agregado
+-Mejora de Frontend
+
+Bugs:
+-[PE-B4]Seguridad! En la recuperacion de informacion de usuario hay un 100% de vulnerabilidad al entregar
+la informacion solicitada por el cliente.
+-[PE-B5] Brecha de seguridad en Login, la auntenticacion de usuario no verificaba password y puedes entrar
+con cualquier password
+
+////////////////////////////////////////////////////////////////////////////////
+
+Version 1.0 (05/06/2024)
+
+////////////////////////////////////////////////////////////////////////////////
+
+[BACKEND]
+
+Hotfix:
+-[PE-B5] Se agrego la verificacion de password, si no coincide con base de datos, ahora te redirecciona por datos erroneos.
+
+Bugs:
+-[PE-B6] Recuperar Password: 
+    -> El Token enviado al cliente no tiene tiempo de expiracion.
+
+-[PE-B7] Login: 
+    -> Se mantiene la sesion del cliente y no finaliza.
+    -> Reenvia el correo de activacion de usuario muchas veces cuando intentas logearte si aun no se verifica, no hay limites ni intentos de reenvio.
+
+Features:
+-[PE-F11] Actualizamos modulo "Recuperar Password", ahora envia un codigo aleatorio temporal para ingresar =  Version 1.0
+-[PE-F12] Agreamos modulo "Cambiar Password" en el Dashboard, si entraste con clave temporal, esta se borrara automaticamente = Version 1.0
+-[PE-F13] Se agrego la verificacion de usuario via Email, si no se verifica reenvia el email para cambiar status false a true.
+-[PE-F14] Se agrego en el data.ini parametros modifcables de servidor Email SMTP para la verificacion y recuperacion de password.
+-[PE-F15] Se Agrego modulo "Feed" Version 0.1 (BETA):
+      -> Se Pueden Agregar noticias solamente de manera manual mediante el endpoint "notices/feed", Tiene un bug al momento de ingresar y retorna el mensaje en flash cumpliendo o no su funcion.
+      -> Las noticias de almacenan en la tabla "feed" en la base de datos con las columnas "id_feed","date","author","feed" y "title"
+      -> Se muestran solamente las dos primeras noticias almacenadas con fecha mas actualizada y no por hora, luego se agregara hora exacta para ser mas precisa su filtracion.
+-[PE-F16] Se agrego en el data.ini parametros modificables del footer y titulo (Pronto implementacion de logo o imagenes para una mayor facilidad de edicion sin modificar codigo interno)
+
+Seguridad:
+-Ahora estare verificando las rutas en la proxima version, la seguridad en el algoritmo debe permitir filtrar los datos maliciosos de los correctos, el hash y salt sera mejorado al igual
+que la auntenticacion, la modificacion de datos personales y por fin estare agregando privilegios de administrador al igual que otros datos importantes para revision de usuarios y sus 
+datos personales y mas!
+
+[FRONTEND]
+
+Features:
+-[PE-F17] Ahora las cargas de pagina se ven mas suaves y no forzadas
+-[PE-F18] Boton en "Recuperar Password" no tenia clase asignada
+-[PE-F19] Reestructuracion de Stylesheet, habian muchos elementos innecesarios por lo que se globalizaron en unos para no tener tantos rendundantes.
+-[PE-F20] Se hizo un poco mas compatible con moviles, aun faltan elementos por globalizar y hacer mas facil su modificacion
+
+Nota Final:
+Esto es el comienzo base de mi proyecto, aunque faltan muchas cosas por mejorar, estoy aprendiendo y voy aplicando lo aprendido, estoy muy feliz de haber llegado tan lejos
+con esto y me gusta el resultado... VAMOS POR MAS!
+
+
+
+////////////////////////////////////////////////////////////////////////////////
+
+Version 1.5 (12/11/2024)
+
+////////////////////////////////////////////////////////////////////////////////
+
+El proyecto esta mejorado en todo aspecto, tanto frontend como backend, el backend es el que mas cambios tiene, desde un panel de administrador mejorado,
+hasta la modificacion de datos de usuario, contiene extras como los datos del configuracion de registro y estatus del servidor si se encuentra operativo.
+
+Estamos mejorando mas el backend ya que es nuestro objetivo que el funcionamiento sera prioridad ante lo estetico, el frontend tiene un desarrollo mas rapido
+y es mas factible darle prioridad a la seguridad/rendimiento y la experiencia del usuario
+
+[BACKEND]
+
+Hotfix:
+-[PE-HF1] Problemas de seguridad y ataques XSS masivos, se agregaron algunas librerias para evitar esto y aprender un poco mas sobre la seguridad
+-[PE-HF2] Se agregaron algunas validaciones de formularios que faltaban en algunos modulos.
+-[PE-HF3] Se arreglo el tiempo de expiracion del token CSRF, ahora hay que actualizar la pagina para poder proceder a ingresar o hacer cualquier accion
+-[PE-HF4] Se arreglo en metodo de inicio del servidor flask, ya que tenia de manera incorrecta los datos de conexion, host, etc etc.., ahora se puede
+cambiar los datos, seleccionar el modo DEBUG y mas.
+
+Bugs:
+-[PE-B7] Feed PVAdmin: No regresa correctamente cuando se termina de crear un nuevo anuncio, se queda en el mismo lugar pero se crea correctamente
+-[PE-B8] Problemas de verificacion de email, se debe cambiar ya que ahora no se puede usar un correo comun, se cambiara el metodo de confirmacion
+-[PE-B9] Las sesiones al expirar, arrojan errores y no redireccionan al index, la unica forma es hacer una desconexion manual
+
+Features:
+-[PE-F21] Se agrego el modulo de acciones en el panel de PVADMIN, donde se podra actualizar el password y el estado de la cuenta manualmente, y porsupuesto
+que habra espacio para otras funcionalidades a futuro!
+-[PE-F22] Ahora podras ver el estado de la base de datos, se esta analizando de incluir la version de la misma y otros datos para futuros ajustes.
+-[PE-F23] Se agrego en el .ini la opcion de deshabilitar la verificacion de email para uso experimental preferible, en base al registro [PE-B8]
+
+[FRONTEND]
+
+Estamos en pruebas para incluir otro tipo de frontend y es con React - Vite, aun nos falta por aprender mucho sobre este lenguaje y frameworks 
+
+Features:
+-[PE-F24] Se Agrego un nuevo frontend con Vite en base a react y javascript, esta en fase alfa.
+-[PE-F25] Nuevos modulos: Entrenamiento y Scoreboard, para un mejor rendimiento para aquellos jugadores que deseen registrar sus avances mediante
+screenshots o videos, aun esta en fase alfa
+-[PE-F26] Mejoras de rendimiento con algunos modulos que no mostraban esteticamente bien sus datos
+
+Nota final:
+
+Este proyecto se basa en todos mis conocimientos, puede parecer algo simple pero realmente es dificil cuando no se tiene un equipo, donde todos
+los sectores pueden compartir sus avances y unificarlos, esto es un reto para mi y estoy dando lo mejor que puedo, de aqui puedo seguir e impartir
+a mas proyectos que ya tengo en mente.
+Mientras tanto tengo que seguir de pie con esto hasta que lo perfeccione y pueda hacerle deploy correctamente, mil gracias por el apoyo.

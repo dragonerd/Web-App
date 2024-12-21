@@ -1,0 +1,14 @@
+{%extends 'base.html'%}
+{% block title%} Recuperar {% endblock %}
+{% block content%}
+<h1 class="title">Recuperación de cuenta</h1>
+<div class="contenedor">
+<form class="lostpass" action="{{url_for('user_recovery.recovery')}}" method="post">
+    {{ form.hidden_tag() }}
+    {{form.email.label}}{{form.email}}
+    </div>
+    <div class="recoveryButton">
+    <input class="Button" type="submit" value="Recuperar">
+    </div>
+</form>
+{% endblock %}
