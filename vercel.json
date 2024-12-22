@@ -1,4 +1,4 @@
 {
-  "buildCommand": "python main.py",
+  "buildCommand": "source venv/bin/activate && python main.py",
   "outputDirectory": "dist"
 }
