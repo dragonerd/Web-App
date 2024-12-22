@@ -1,4 +1,4 @@
 {
-  "buildCommand": "source venv/bin/activate",
+  "buildCommand": "pip install -r requierements.txt",
   "outputDirectory": "dist"
 }
