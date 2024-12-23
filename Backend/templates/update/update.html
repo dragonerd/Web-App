@@ -1,0 +1,23 @@
+{%extends 'base.html'%}
+{% block title%} Actualizar Informacion {% endblock %}
+{% block content%}
+<h1 class="title">Actualizar Informacion</h1>
+<div class="contenedor">
+    <form class="form" method="POST" action="{{url_for('user_updateinfo.updatemyinfo')}}" >
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+        <label for="">Disciplines:</label>
+        <select id="options-list" name="disciplines" required>
+                <option value="1">Just Dance</option>
+                <option value="2">Beat Saber</option>
+                <option value="3">Casual Player</option>
+            </select>
+</div>
+</div>
+<div class="MarginButton">
+    <input class="Button" type="submit" value="Actualizar">
+    </div>
+    <div class="MarginButton">
+        <a class="Button" type="Button" value="Regresar" href="{{ url_for('user_dashboard.dashboard')}}">Regresar</a>
+        </div>
+</form>
+{% endblock %}

@@ -1,0 +1,45 @@
+<!--PAGINA QUE ESTARA EN EL INICIO-->
+{% extends 'base.html' %}
+<!-- extends permite aplicarle la capa hereada de base.html a esta web-->
+{% block title%} pagina de inicio {% endblock %}
+<!--Block title permite agregarle la seccion en el titulo-->
+
+{% block content%}
+{% if session['jwt_token']%}
+    <h2 class="GuestMessage">{{ text_data['key4'] }} {{ text_data['version']}} </h2>
+    <h2 class="MemberMessage">Bienvenido, {{ session['username'] }}</h2>
+{% else %}
+    <h2 class="GuestMessage">{{ text_data['key4'] }}</h2>
+{% endif %}
+<!--{% if user %}
+<div class = "title">
+    Contraseña recuperada: {{ user.password }}
+</div>
+{% endif %}-->
+    <div class="MainMenuPosition">
+        <nav class="MainMenu">
+            <ul class="indexbuttons">
+              {% if session['jwt_token'] %}
+                <a class='dashboard' href="{{ url_for('user_dashboard.dashboard') }}">Mi perfil</a>
+                <a class='logout' href="{{url_for('user_dashboard.logout')}}">Logout</a>
+                <a class="training" href="{{ url_for('training_mode.training')}}">Entrenamiento</a>
+                <a class="RegisterButton" href="#">Competencias</a>
+                <a class="RegisterButton" href="#">Eventos</a>
+              {% else %}
+                <a class="LoginButton" href="{{url_for('user_login.login')}}">Log in</a>
+                <a class="RecoverButton"href="{{url_for('user_recovery.recovery')}}">Olvidé mi info</a>
+                <a class="RegisterButton" href="{{ url_for('user_register.newregister')}}">Soy nuevo!</a>
+                <a class="RegisterButton" href="#">Competencias</a>
+                <a class="RegisterButton" href="#">Eventos</a>
+              {% endif %}
+            </ul>
+            <section>
+                {% block anuncios %}
+                {% include "anuncios.html" %}
+                {% endblock %}
+            </section>
+          </nav>
+    </div>
+    
+    </form>
+    {% endblock %}

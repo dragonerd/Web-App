@@ -1,0 +1,35 @@
+{%extends 'pvadmin_base.html'%}
+{% block title %} PvAdmin Dashboard Feed 0.1 {% endblock %}
+{% block content %}
+<h1 class="title">Feed</h1>
+<div class="container_pvadmin">
+<table class="feeds">
+    <tr>
+        <th>Eliminar</th>
+        <th>ID</th>
+        <th>Título</th>
+        <th>Autor</th>
+        <th>Contenido</th>
+        <th>Creado</th>
+    </tr>
+    {% for feed_entry in feed_data %}
+        <tr>
+            <form action="{{ url_for('admin_feed.delete_feed') }}" method="POST">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+                <td><input type="checkbox" name="feed_ids" value="{{ feed_entry['id_feed'] }}" {% if feed_entry['selected'] %}checked{% endif %}></td>
+                <td>{{ feed_entry['id_feed'] }}</td>
+                <td>{{ feed_entry['title'] }}</td>
+                <td>{{ feed_entry['author'] }}</td>
+                <td>{{ feed_entry['feed'] }}</td>
+                <td>{{ feed_entry['date'] }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+</div>
+    <div class="MarginButton">
+        <button class="Button" type="submit">Eliminar Seleccionadas</button>
+    </div>
+</form>  <div class="MarginButton">
+    <a class="Button" type="Button" value="Regresar" href="{{ url_for('admin_feed.pvadminfeed')}}">Regresar</a>
+</div>
+{% endblock %}

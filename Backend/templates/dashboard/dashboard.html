@@ -1,0 +1,36 @@
+{%extends 'base.html'%}
+{% block title%} Dashboard {% endblock %}
+{% block content%}
+{% if error %}
+<p class="error">{{ error }}</p>
+{% endif %}
+<div class="contenedor">
+    
+    <div class="dashboardprofile">
+        <h2> Estadisticas</h2>
+        <p>ELO: No disponible</p>
+        <p>EXP: 0</p>
+        <p>Proximo Rank-up: 100</p>
+        <p>Disciplina:{{discipline}}</p>
+    </div>
+
+    <form class="dashboardprofile" action="{{url_for('user_dashboard.dashboard')}}" method="get">
+        <h2> Datos Personales</h2>
+        <p>Username: {{username}}</p>
+        <p>Nombre completo: {{fname}} {{lname}}</p>
+        <p>Email:{{email}}</p>
+        
+
+    </div>
+    </form>
+    <div class="MarginButton">
+        <br>
+        <a class="Button" href="{{url_for('user_dashboard.logout')}}">Logout</a>
+        <br>
+        <a class="Button" href="{{url_for('user_update.newpassword')}}">Cambiar Password</a>
+        <br>
+        <a class="Button" href="{{url_for('user_updateinfo.updatemyinfo')}}">Actualizar Informacion</a>
+        <br>
+        <a class="Button" href="{{url_for('user_score.scores')}}">Mis Records</a>
+</div>
+{% endblock %}

@@ -1,0 +1,101 @@
+<!--PAGINA BASE QUE TENDRA EN TODA LA ESTRUCTURA WEB -PVADMIN-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename ='css/style.css')}}">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+    <title>Proyecto ELO - {% block title %}{% endblock %}</title>
+</head>
+<body>
+    {% if session['pvadmin_email']%}
+    <div class="InicioButton">
+        <a class="Button" href="{{ url_for('admin_dashboard.pvadmindashboard')}}">INICIO</a>
+    </div>
+        <h2 class="GuestMessage">{{ text_data['key4'] }}</h2>
+    {% else %}
+        <h2 class="GuestMessage">{{ text_data['key4'] }}</h2>
+    {% endif %}
+    <script>
+        {% with success = get_flashed_messages(category_filter=["success"]) %}
+        {% if success %}
+            {% for message in success %}
+                Swal.fire({
+                    title: '{{ message }}',
+                    icon: 'success',
+                    timer: 3000,
+                    showConfirmButton: false,
+                    customClass: {
+                        htmlContainer: 'Swal',
+                        title: 'Swal',
+                    }
+                });
+            {% endfor %}
+        {% endif %}
+        {% endwith %}
+    </script>
+
+    <script>
+        {% with success = get_flashed_messages(category_filter=["info"]) %}
+        {% if success %}
+            {% for message in success %}
+                Swal.fire({
+                    title: '{{ message }}',
+                    icon: 'info',
+                    timer: 3000,
+                    showConfirmButton: false,
+                    customClass: {
+                        htmlContainer: 'Swal',
+                        title: 'Swal',
+                    }
+                });
+            {% endfor %}
+        {% endif %}
+        {% endwith %}
+    </script>
+    
+    <script>
+        {% with errors = get_flashed_messages(category_filter=["error"]) %}
+        {% if errors %}
+            {% for message in errors %}
+                Swal.fire({
+                    title: '{{ message }}',
+                    icon: 'error',
+                    timer: 3000,
+                    showConfirmButton: false,
+                    customClass: {
+                        htmlContainer: 'Swal',
+                        title: 'Swal',
+                    }
+                });
+            {% endfor %}
+        {% endif %}
+        {% endwith %}
+    </script>
+    
+    <script>
+        {% with errors = get_flashed_messages(category_filter=["warning"]) %}
+        {% if errors %}
+            {% for message in errors %}
+                Swal.fire({
+                    title: '{{ message }}',
+                    icon: 'warning',
+                    timer: 3000,
+                    showConfirmButton: false,
+                    customClass: {
+                        htmlContainer: 'Swal',
+                        title: 'Swal',
+                    }
+                });
+            {% endfor %}
+        {% endif %}
+        {% endwith %}
+    </script>
+
+{% block content%}
+{% endblock %}
+</body>
+</html>

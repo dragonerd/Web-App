@@ -1,0 +1,20 @@
+{% extends 'pvadmin_base.html'%}
+{% block title%} PvAdmin Login Version 1.0 {% endblock %}
+{% block content%}
+
+<h2 class="title">Ingreso</h2>
+<div class="contenedor">
+<form class="login" action="/pvadmin/login" method="post">
+    {{ form.hidden_tag() }}
+    <input type="hidden" name="X-CSRF-TOKEN" value="{{ csrf_token() }}"/>
+    <label for="pvadmin_email">Email:</label>
+    <input type="email" id="pvadmin_email" name="pvadmin_email" required>
+    <label for="pvadmin_password">Contraseña:</label>
+    <input type="password" id="pvadmin_password" name="pvadmin_password" required>
+</div>
+    <div class="MarginButton">
+        <br>
+        <button class="Button" type="submit">Iniciar Sesión</button>
+    </div>
+</form>
+{% endblock %}

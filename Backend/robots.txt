@@ -1,0 +1,3 @@
+Disallow: /pvadmin/
+Disallow: /pvadmin_templates/
+Disallow: /static/

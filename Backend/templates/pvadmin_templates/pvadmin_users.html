@@ -1,0 +1,54 @@
+{% extends 'pvadmin_base.html'%}
+{% block title %} PvAdmin SeekUsers Version 0.1 {% endblock %}
+{% block content %}
+<h1 class="title">Usuarios</h1>
+<div class="container_pvadmin">
+<p class="total_accounts">Total Accounts {{total_users}}</p>
+</div>
+<div class="container_pvadmin">
+<table class="pvadmin-allusers">
+    <tr>
+        <th>Eliminar</th>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Apellido</th>
+        <th>email</th>
+        <th>ID de Usuario</th>
+        <th>Pass Temporal</th>
+        <th>Validacion (intentos)</th>
+        <th>Disciplina</th>
+        <th>Status</th>
+        <th class="pvadmin-th">Acciones</th>
+
+        
+    </tr>
+    {% for user_entry in user_data %}
+        <tr>
+            <form action="{{ url_for('admin_users.delete_user') }}" method="POST">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+                <td><input type="checkbox" name="users_ids" value="{{ user_entry['id_profile'] }}" 
+                    {% if user_entry['selected'] %}
+                    checked
+                    {% endif %}></td>
+                <td>{{ user_entry['id_profile'] }}</td>
+                <td>{{ user_entry['fname'] }}</td>
+                <td>{{ user_entry['lname'] }}</td>
+                <td>{{ user_entry['email'] }}</td>
+                <td>{{ user_entry['username'] }}</td>
+                <td>{{ user_entry['temp_password'] }}</td>
+                <td>{{ user_entry['trysend'] }}</td>
+                <td>{{ user_entry['discipline'] }}</td>
+                <td>{{ user_entry['status'] }}</td>
+                <td><a href="{{ url_for('admin_password.updatepassword' , user_id=user_entry['id_profile'], password=user_entry['password']) }}" class="pvadmin-actions">Cambiar Password</a></td>
+                <td><a href="{{ url_for('admin_update_status.updatestatus', user_id=user_entry['id_profile'], status=user_entry['status']) }}" class="pvadmin-actions">Cambiar Status</a></td>
+            </tr>
+        {% endfor %}
+    </table>
+</div>
+    <div class="MarginButton">
+        <button class="Button" type="submit">Eliminar Seleccionadas</button>
+    </div>
+</form>  <div class="MarginButton">
+    <a class="Button" type="Button" value="Regresar" href="{{ url_for('admin_dashboard.pvadmindashboard')}}">Regresar</a>
+</div>
+{% endblock %}

@@ -1,0 +1,14 @@
+{% block anuncios %}
+<section class="contenedorNoticias">
+        {% for news_item in news %}
+        <!--<h2 class="TitleAnuncios">Anuncios</h2>-->
+    <p>
+        <div class="Anuncios">
+            <h1 class="FeedTitle">{{ news_item.title }}</h1>
+            <div class="FeedAuthor">By {{ news_item.author }} - {{ news_item.date }}</div>
+            <p>{{ news_item.feed }}</p> 
+        </div>
+    </p>
+    {% endfor %}
+</section>
+{% endblock %}

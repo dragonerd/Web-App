@@ -1,0 +1,33 @@
+{%extends 'base.html'%}
+{% block title%} Entrenamiento {% endblock %}
+{% block content%}
+{% if error %}
+<p class="error">{{ error }}</p>
+{% endif %}
+<div class="contenedor">
+
+    
+    <div class="dashboardprofile">
+        <h2> Lecciones</h2>
+        <details>
+            <summary>Sección 1</summary>
+            <p>test</p>
+          </details>
+          
+          <details>
+            <summary>Sección 2</summary>
+            <p>Contenido de la sección 2</p>
+          </details>
+    </div>
+
+    <form class="dashboardprofile" action="{{url_for('user_dashboard.dashboard')}}" method="GET">
+        <p>Bienvenido! {{username}}</p>
+        <p>Disciplina:{{discipline}}</p>
+
+    </div>
+    </form>
+    <div class="MarginButton">
+        <br>
+        <a class="Button" href="{{url_for('user_dashboard.logout')}}">Logout</a>
+</div>
+{% endblock %}
