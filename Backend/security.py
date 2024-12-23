@@ -1,8 +1,4 @@
 import configparser
-from flask import make_response, request
-from werkzeug.wrappers import Response
-from dbconfig import app
-import requests
 
 def load_config():
     config = configparser.ConfigParser()
