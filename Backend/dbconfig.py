@@ -43,9 +43,9 @@ def load_config():
 config = load_config()
 
 #Base de datos DUMMY
-dummy_database = config.getboolean('Develop', 'DummyDB')
+dummy_database = config.getboolean('Database', 'DummyDB')
 app.config['DUMMY_DATABASE'] = dummy_database
-valor_booleano = config.getboolean('Develop', 'DummyDB')
+valor_booleano = config.getboolean('Database', 'DummyDB')
 print(f'\033[1;32m[DUMMY DATABASE] = {dummy_database}\033[0m')
 
 
