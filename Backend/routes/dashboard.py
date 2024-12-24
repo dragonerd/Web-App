@@ -4,7 +4,6 @@ from text import text_data
 from models.models import UserInfo
 from models.disciplines import get_discipline
 from dbconfig import db, app
-import datetime
 from routes.csrf import csrf_status, csrf_check_status
 from options import time
 

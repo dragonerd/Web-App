@@ -1,5 +1,5 @@
 from flask import render_template, make_response
-from Backend.dbconfig import app, db, mail, server_port, server_host
+from dbconfig import app, db, mail, server_port, server_host
 from flask_mail import Message
 from text import text_data
 from pvadmin.models.feed import FeedInfo

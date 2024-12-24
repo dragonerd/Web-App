@@ -1,5 +1,5 @@
 import jwt
-from Backend.dbconfig import SECRET_KEY
+from dbconfig import SECRET_KEY
 from flask import current_app
 
 def generate_jwt(user_id):
